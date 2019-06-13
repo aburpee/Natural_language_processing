@@ -10,7 +10,7 @@ The Internet is full of toxic posts and comments ad nauseum. As a member of the 
 
 In this project, I examined posts from reddit.com. I used the pushshift api to query 20,000 posts from two subreddits, LifeProTips and UnethicalLifeProTips, 10,000 titles from each. After cleaning the data, my distribution of classes was 50.2% to 49.8%, so my classes were still very much even. The titles in LPT have mean word counts of 23 words, while the titles in ULPT have mean word counts of 25 words. As expected, they do have some overlap in the words used, so I will be adding these words to a 'stoplist' so that they are not considered in my modeling. Below is a histogram displaying the distribution of character counts in each class.
 
-![Character Count Distribution](./images/character_count.png)
+![Character Count Distribution](./adam_burpee_la7/images/character_count.png)
 
 In addition, I pulled data from [Kaggle's Quora Insincere Competition](https://www.kaggle.com/c/quora-insincere-questions-classification/data) to test my models against unseen data. The kaggle data contains over a million entries, with a significantly unbalanced class distribution. The distribution of insincere posts was 6% to 94%, in favor of the 0 class, or legitimate posts. 
 
@@ -18,11 +18,11 @@ In addition, I pulled data from [Kaggle's Quora Insincere Competition](https://w
 
 The logistic Regression Classifier performed well on my reddit data, but not as well as the Random Forest Classifier. With a training accuracy of 94% and a testing accuracy of 78%, it was pretty overfit, but considering that we are dealing with classification, a 28% improvement from my baseline model is pretty substantial. Some of the keywords that gave the most information to my model are below in the graph. When I examined the middle 10% of predicted probabilities, I found that only 7% of my titles were between 45% and 55% probability of being in the target class. I think this is a pretty good indication that my model found some very polar examples of words that would be used in a toxic environment vs. a nontoxic environment. In my kaggle data, logistic regression had an accuracy score of 60%, which is pretty great for a real world example. 
 
-![Top 20 Words LogReg](./images/beta_weights_lr.png)
+![Top 20 Words LogReg](./adam_burpee_la7/images/beta_weights_lr.png)
 
 I was expecting the Random Forest Classifier to blow the logreg classifier out of the water. The reality, though, is that it didn't. It was amazing on the training data, with an accuracy score of 99%, but on the testing data, it marginally edged out the logistic regression model, with an accuracy score of 79%. Random Forest is a quick and effective classifier, as it comes from the decision tree classifiers. It is different in that it picks from a random subset of features at each node before making the best split it can. I used 100 estimators, meaning there were 100 trees in the forest, and I used the default features, so there were about 126 features considered in my model. The top 20 features that gave the model 'the most information' were pretty similar to the top 20 features for logistic regression, with a few differences. The plot is below. I created a confusion matrix for my random forest model, and it showed that about 1/8 of all of the posts in the testing data were 'false negatives' which in this model is what I was trying to minimize. It is better for my model to flag regular posts as toxic than to let toxic posts slide through the cracks. 
 
-![Top 20 Words Random Forest](./images/features_rf.png)
+![Top 20 Words Random Forest](./adam_burpee_la7/images/features_rf.png)
 
 
 
@@ -41,10 +41,10 @@ As mentioned above, perhaps another model that goes through historical posts of 
 
 
 # Notebooks:
-1. [Pushshift API Querying](./code/01_pushshift_query.ipynb)
-1. [Data Cleaning](./code/02_data_cleaning.ipynb)
-1. [Logistic Regression Modeling](./code/03_modeling.ipynb)
-1. [Random Forest Modeling](./code/03b_modeling_rf.ipynb)
+1. [Pushshift API Querying](./adam_burpee_la7/code/01_pushshift_query.ipynb)
+1. [Data Cleaning](./adam_burpee_la7/code/02_data_cleaning.ipynb)
+1. [Logistic Regression Modeling](./adam_burpee_la7/code/03_modeling.ipynb)
+1. [Random Forest Modeling](./adam_burpee_la7/code/03b_modeling_rf.ipynb)
 
 
 
